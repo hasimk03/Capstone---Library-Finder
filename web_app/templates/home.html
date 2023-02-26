@@ -4,15 +4,31 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css')}}">
+    <title>Login</title>
 </head>
 
 <body>
-<h1>Press this <a href="http://127.0.0.1:5000/Busch">link</a> to view Busch locations.</h1>
-<h1>Press this <a href="http://127.0.0.1:5000/Livingston">link</a> to view Livingston locations.</h1>
-<h1>Press this <a href="http://127.0.0.1:5000/CollegeAve">link</a> to view College Ave locations.</h1>
-<h1>Press this <a href="http://127.0.0.1:5000/CookDoug">link</a> to view Cook Douglass locations.</h1>
+<div class = "banner-text">
+    <ul>
+        <li> Home</li>
+        <li> Busch</li>
+        <li> Livingston</li>
+        <li> Logout </li>
 
+    </ul>
+
+    <h2> ECE Libary Finder</h2>
+</div>
+
+<div class ="animation-area">
+    <ul class ="box-area">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
 
 </body>
 </html>
