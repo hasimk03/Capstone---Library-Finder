@@ -159,6 +159,30 @@
             height: 110px;
             animation-delay: 3.5s;
         }
+        /* unvisited link */
+        a:link {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* visited link */
+        a:visited {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* mouse over link */
+        a:hover {
+            color: red;
+            text-decoration: none;
+        }
+
+        /* selected link */
+        a:active {
+            color: white;
+            text-decoration: none;
+        }
+
 
         @keyframes animate{
             0%{
