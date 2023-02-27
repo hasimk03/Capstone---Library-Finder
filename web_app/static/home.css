@@ -9,6 +9,51 @@
             display: flex;
         }
 
+        .login-form {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .login-form label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .login-form input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-form input[type="submit"]:hover {
+            background-color: #666;
+        }
         .banner-text{
             width: 100%;
             position: absolute;
@@ -113,30 +158,6 @@
             width: 110px;
             height: 110px;
             animation-delay: 3.5s;
-        }
-
-        /* unvisited link */
-        a:link {
-            color: white;
-            text-decoration: none;
-        }
-        
-        /* visited link */
-        a:visited {
-            color: white;
-            text-decoration: none;
-        }
-        
-        /* mouse over link */
-        a:hover {
-            color: red;
-            text-decoration: none;
-        }
-        
-        /* selected link */
-        a:active {
-            color: white;
-            text-decoration: none;
         }
 
         @keyframes animate{
