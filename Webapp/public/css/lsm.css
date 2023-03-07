@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.occupancy {
+    font-weight: bold;
+    color: green;
+}
+
+.progress-bar {
+    width: 50%;
+    height: 25px;
+    border: 1px solid #333;
+    position: relative;
+}
+
+.filler {
+    height: 100%;
+    background-color: green;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 75%; /* This is just a placeholder value, you can update this with JavaScript */
+}
