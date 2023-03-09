@@ -75,7 +75,7 @@ def logout():
 @views.route('/Livingston')
 @login_required
 def import_livi():
-    return "<h1>Livi</h1>"
+    return render_template("livingston.html")
 
 @views.route('/Busch')
 @login_required
