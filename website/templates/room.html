@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/lsm.css">
@@ -8,15 +9,23 @@
     <title>Occupancy Page</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
-        <h1>Occupancy LSM Page</h1>
+        <h1>
+            <center>Occupancy Busch Room 1</center>
+        </h1>
     </header>
     <main>
-        <h2>Current Occupancy: <span class="occupancy">75%</span></h2>
-        <div class="progress-bar">
-            <div class="filler"></div>
-        </div>
+        <h2>
+            <center>Current Occupancy: 75%</center>
+        </h2>
+        <center><label for="file">Occupancy:</label>
+            <progress id="file" value="75" max="100"> 75% </progress></center>
+        
+        <h3> <a href='/'>Return Home</a></h3>
+        
     </main>
 </body>
+
 </html>

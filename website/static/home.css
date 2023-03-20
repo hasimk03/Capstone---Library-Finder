@@ -1,196 +1,99 @@
-   *{
-            margin: 0;
-            padding: 0;
+   * {
+       margin: 0;
+       padding: 0;
 
-        }
+   }
 
-        body{
-            font-family: Baloo;
-            display: flex;
-        }
+   body {
+       font-family: Baloo;
+       display: flex;
+   }
 
-        .login-form {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
+   .animation-area {
+       background: linear-gradient(to left, #8942a8, #ba382f);
+       width: 100%;
+       height: 100vh;
+   }
 
-        .login-form h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
+   .nava {
+       width: 100%;
+       position: absolute;
+       z-index: 1;
+   }
 
-        .login-form label {
-            display: block;
-            margin-bottom: 10px;
-            color: #333;
-        }
+   .nava ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+       overflow: hidden;
+       background-color: #333;
+   }
 
-        .login-form input[type="text"],
-        .login-form input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
+   .nava li {
+       float: right;
+   }
 
-        .login-form input[type="submit"] {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+   .nava li a {
+       display: block;
+       color: white;
+       text-align: center;
+       padding: 14px 16px;
+       text-decoration: none;
+   }
 
-        .login-form input[type="submit"]:hover {
-            background-color: #666;
-        }
-        .banner-text{
-            width: 100%;
-            position: absolute;
-            z-index: 1;
-        }
+   .nava li a:hover {
+       background-color: rgb(159, 86, 86);
+   }
 
-        .banner-text ul{
-            height: 50px;
-            float: right;
+   li a, .dropbtn {
+       display: inline-block;
+       color: white;
+       text-align: center;
+       padding: 14px 16px;
+       text-decoration: none;
+   }
 
-        }
+   .dropdown:hover .dropbtn {
+       background-color: rgb(159, 86, 86);
+   }
 
-        .banner-text ul li {
-            display: inline-block;
-            padding: 40px 15px;
-            text-transform: uppercase;
-            color: #fff;
-            font-size: 20px;
-        }
+   
 
-        .banner-text ul li:hover{
-             color: red;
-        }
+   .dropdown-content {
+       display: none;
+       position: absolute;
+       background-color: #7e3c3c;
+       min-width: 160px;
+       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+       z-index: 1;
+   }
 
+   .dropdown-content a {
+       color: red;
+       padding: 12px 16px;
+       text-decoration: none;
+       display: block;
+       text-align: left;
+   }
 
-        .banner-text h2{
-            text-align: center;
-            color: #fff;
-            font-size: 50px;
-            margin-top: 20%;
-        }
+   .dropdown-content a:hover {
+       background-color: #f1f1f1;
+   }
+
+   .dropdown:hover .dropdown-content {
+       display: block;
+   }
 
 
-        .animation-area{
-            background: linear-gradient(to left,#8942a8,#ba382f);
-            width: 100%;
-            height: 100vh;
-        }
 
-        .box-area{
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
+   @keyframes animate {
+       0% {
+           transform: translateY(0) rotate(0deg);
+           opacity: 1;
+       }
 
-        .box-area li{
-            position: absolute;
-            display: block;
-            list-style: none;
-            width: 25px;
-            height: 25px;
-            border-radius: 90px;
-            background: rgba(255,255,255,0.2);
-            animation: animate 20s alternate infinite;
-            bottom: -120px;
-
-        }
-
-        .box-area li:nth-child(1){
-            left: 86%;
-            width: 80px;
-            height: 90px;
-            animation-delay: 0;
-        }
-
-        .box-area li:nth-child(2){
-            left: 12%;
-            width: 30px;
-            height: 30px;
-            animation-delay: 1.5s;
-            animation-duration: 10s;
-
-        }
-
-        .box-area li:nth-child(3){
-            left: 70%;
-            width: 150px;
-            height: 150px;
-            animation-delay: 5.5s;
-        }
-
-
-        .box-area li:nth-child(4){
-            left: 70%;
-            width: 150px;
-            height: 150px;
-            animation-delay: 0s;
-            animation-duration: 15s;
-        }
-
-        .box-area li:nth-child(5){
-            left: 65%;
-            width: 40px;
-            height: 40px;
-            animation-delay: 0s;
-        }
-        .box-area li:nth-child(6){
-            left: 15%;
-            width: 110px;
-            height: 110px;
-            animation-delay: 3.5s;
-        }
-        /* unvisited link */
-        a:link {
-            color: white;
-            text-decoration: none;
-        }
-
-        /* visited link */
-        a:visited {
-            color: white;
-            text-decoration: none;
-        }
-
-        /* mouse over link */
-        a:hover {
-            color: red;
-            text-decoration: none;
-        }
-
-        /* selected link */
-        a:active {
-            color: white;
-            text-decoration: none;
-        }
-
-
-        @keyframes animate{
-            0%{
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100%{
-                transform: translateY(-800px) rotate(360deg);
-                opacity: 0;
-            }
-        }
+       100% {
+           transform: translateY(-800px) rotate(360deg);
+           opacity: 0;
+       }
+   }

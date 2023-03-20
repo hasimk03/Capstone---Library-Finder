@@ -75,12 +75,17 @@ def logout():
 @views.route('/Livingston')
 @login_required
 def import_livi():
-    return render_template("livingston.html")
+    return render_template("room.html")
 
 @views.route('/Busch')
 @login_required
 def import_busch():
     return "<h1>Busch</h1>"
+
+@views.route('/Busch/Room1')
+@login_required
+def import_busch1():
+    return render_template('room.html')
 
 @views.route('/CollegeAve')
 @login_required
