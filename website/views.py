@@ -65,12 +65,17 @@ def callback():
 
     session["google_id"] = id_info.get("sub")
     session["name"] = id_info.get("name")
-    return redirect("/")
+    return redirect("/home")
 
 @views.route('/logout')
 def logout():
     session.clear()
     return redirect("/")
+
+@views.route('/home')
+@login_required
+def import_home():
+    return render_template("home_logged_in.html")
 
 @views.route('/Livingston')
 @login_required

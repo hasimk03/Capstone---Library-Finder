@@ -7,16 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css')}}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <title>Login</title>
+    <title>Logged In</title>
 </head>
 
 <body>
 
 
+
+    
     <div class='nava'>
         <ul>
             <li><a href="/home">Home</a></li>
-            <li class="dropdown">    
+            <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Busch</a>
                 <div class="dropdown-content">
                     <a href="/Busch/Room1">Room 1</a>
@@ -27,12 +29,17 @@
             <li><a href="/Livingston">Livingston</a></li>
             <li><a href="/CollegeAve">College Ave</a></li>
             <li><a href="CookDoug">Cook/Douglass</a></li>
-            <li> <a href='/login'>Login with &nbsp;<img src="static/google-logo.png" width='15' height='15'></a></li>
-
+            <li> <a href='/logout'>Logout</a></li>
+            
         </ul>
     </div>
 
+    
     <div class = 'ani'></div>
+    
+
+
+    
 </body>
 
 </html>
