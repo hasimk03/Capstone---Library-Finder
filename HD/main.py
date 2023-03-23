@@ -73,9 +73,9 @@ def main():
     AWB = True
 
     # Cap is video output from ESP32
-    cap = cv2.VideoCapture(URL + ":81/stream")
+    #cap = cv2.VideoCapture(URL + ":81/stream")
     # Cap is video output from Computer Camera.
-    #cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0)
 
     fps_start_time = datetime.datetime.now()
     fps = 0
@@ -83,6 +83,7 @@ def main():
     lpc_count = 0
     opc_count = 0
     object_id_list = []
+    index=0
     while True:
         ret, frame = cap.read()
         frame = imutils.resize(frame, width=600)
@@ -140,6 +141,15 @@ def main():
 
         lpc_count = len(objects)
         print(lpc_count)
+        #####
+        index+=1
+        curr_date = datetime.datetime.now()
+        date,time  = curr_date.strftime('%x'), curr_date.strftime('%X')
+        f = open("data1.txt", "a")
+        f.write("data-{0} | num={1} | {2} | {3} |".format(index,str(lpc_count),date,time)+"\n")
+        f.close()
+
+        ####
         opc_count = len(object_id_list)
 
         lpc_txt = "LPC: {}".format(lpc_count)
@@ -153,6 +163,7 @@ def main():
         if key == ord('q'):
             break
 
+    open('data1.txt', 'w').close()
     cv2.destroyAllWindows()
 
 
