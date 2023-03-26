@@ -60,22 +60,22 @@ def non_max_suppression_fast(boxes, overlapThresh):
 
 
 def main():
-
-
     '''
     INFO SECTION
     - if you want to monitor raw parameters of ESP32CAM, open the browser and go to http://192.168.x.x/status
     - command can be sent through an HTTP get composed in the following way http://192.168.x.x/control?var=VARIABLE_NAME&val=VALUE (check varname and value in status)
     '''
 
-    # ESP32 URL
-    URL = "http://192.168.1.206"
     AWB = True
 
-    # Cap is video output from ESP32
-    #cap = cv2.VideoCapture(URL + ":81/stream")
-    # Cap is video output from Computer Camera.
+    #Testing Mode: Enable Camera from Built in Webcam
     cap = cv2.VideoCapture(0)
+
+    #Deployment Mode: Connect to Arduino Cam Web Server
+    URL = 'http://192.168.1.80'                                     #ESP32 IP Address
+    cap = cv2.VideoCapture(URL+':81/stream')
+
+
 
     fps_start_time = datetime.datetime.now()
     fps = 0
