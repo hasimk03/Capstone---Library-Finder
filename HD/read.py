@@ -4,10 +4,12 @@ from mysql.connector import connect, Error
 from dateutil.parser  import parse
 
 def read_raw_data(connection):
-    i,count,prev,stack = 0,0,-1,[]
+    start = t.time()
+    i,count,prev,azure_output,stack = 0,0,-1,'',[]
     with open('data1.txt','r') as f:
         while True:
-            data = f.readline()
+            data = f.readline()                                             #read data from text file
+            write=False
             #store values in line
             try:
                 data_num, npc_count,date,time = data.split(" | ")           #split data by delimitter
@@ -17,6 +19,7 @@ def read_raw_data(connection):
                 t.sleep(5)
                 try:
                     data = f.readline()
+                    index+=1
                     data_num, npc_count,date,time = data.split(" | ")           #split data by delimitter
                 except:
                     #ERRORR -> need to change cursor location
@@ -29,6 +32,10 @@ def read_raw_data(connection):
                 stack.append(int(npc_count))
                 print("Querying database with first value:\n  people={0}\n  date={1}\n  time={2}".format(npc_count,date,time))
                 query_db(connection,npc_count,date,time)                         #query_db
+        #write to text file for cloud upload
+                azure_output = "data-{0}|{1}|{2}|{3}|".format(count,str(npc_count),date,time)+"\n"
+                write=True
+        #call main func of connect [which connects to azure and uploads recent entry ]
                 t.sleep(3); 
             elif len(stack)>0 and stack[-1] != int(npc_count):                   #new incoming data val
                 prev = stack[-1]
@@ -36,22 +43,40 @@ def read_raw_data(connection):
                 count=0                                
             elif len(stack)>0 and prev > int(npc_count) and count==70:                      #incr num ppl and query db
                 print("Querying database with:\n  people={0}\n  date={1}\n  time={2}".format(npc_count,date,time))
-                query_db(connection,npc_count,date,time)                     
+                query_db(connection,npc_count,date,time)   
+        #write to text file for cloud upload
+                azure_output = "data-{0}|{1}|{2}|{3}|".format(count,str(npc_count),date,time)+"\n"
+                write=True
+        #call main func of connect [which connects to azure and uploads recent entry ]                  
                 t.sleep(3); 
             elif len(stack)>0 and prev < int(npc_count) and count==7:                     #dec num ppl and query db
                 print("Querying database with:\n  people={0}\n  date={1}\n  time={2}".format(npc_count,date,time))
-                query_db(connection,npc_count,date,time)                      
+                query_db(connection,npc_count,date,time)            
+        #write to text file for cloud upload
+                azure_output = "data-{0}|{1}|{2}|{3}|".format(count,str(npc_count),date,time)+"\n"
+                write=True
+        #call main func of connect [which connects to azure and uploads recent entry ]
                 t.sleep(3); 
 
             if len(stack)>0 and stack[-1] == int(npc_count):                   #same value
                 count+=1
             print("count={0} | npc_count={1} | stack.pop()={2}".format(count,npc_count,stack[-1]))
-            #t.sleep(1)
             pop = stack[-1]                                                      #top of stack
-
             i+=1
-            #print("count={0} | num={1} | len(stack)={2} | stack[-1]={3}".format(count,npc_count,len(stack),stack[-1]))
+
+            #####
+            #check some conditions then write to azure_data.txt and call connect_to_azure
+            elapsed_time = t.time() - start
+            if (write==True and elapsed_time >=5) or (count==1):
+                print("Writing data {0} to Azure Blob Storage".format(count))
+                azure_file = open('azure_data.txt','a')
+                start = t.time()
+                azure_file.write(azure_output)
+                azure_file.close()
+            ####
             t.sleep(0.48)
+    f.close()
+    #open and delete azure_data.txt file
 
 
 def connect_to_mySQL_server():
@@ -122,31 +147,11 @@ def main():
     except Error as e:
         print("The following error occured: ",e)
     finally:
-        print("Pulling records")
-        query_db(connection,push=False)
+        #print("Pulling records")
+        #query_db(connection,push=False)
+        print("closing connection")
         close_mySQL(connection)
 
 
 if __name__ == "__main__":
     main()
-
-
-
-###############################################################OLD CODE#####################################################################
-def ignore():
-    try:
-        with connect(
-            host="localhost",
-            #user=input("Enter username: "),
-            #password=getpass("Enter password: "),
-            user='root',
-            password='ussucks1'
-        ) as connection:
-            print("Connection {} Sucessful!".format(connection))
-            show_db_query = "SHOW DATABASES"
-            with connection.cursor() as cursor:
-                cursor.execute(show_db_query)
-                for db in cursor:
-                    print(db)
-    except Error as e:
-        print(e)

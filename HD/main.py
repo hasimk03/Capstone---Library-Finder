@@ -73,7 +73,7 @@ def main():
 
     #Deployment Mode: Connect to Arduino Cam Web Server
     URL = 'http://192.168.1.80'                                     #ESP32 IP Address
-    cap = cv2.VideoCapture(URL+':81/stream')
+    #cap = cv2.VideoCapture(URL+':81/stream')
 
 
 
@@ -163,7 +163,7 @@ def main():
         if key == ord('q'):
             break
 
-    open('data1.txt', 'w').close()
+    #open('data1.txt', 'w').close()
     cv2.destroyAllWindows()
 
 
