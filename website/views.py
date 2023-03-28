@@ -7,6 +7,7 @@ from pip._vendor import cachecontrol
 import google.auth.transport.requests
 import requests
 
+
 views = Blueprint('views', __name__)
 
 #creating different pages

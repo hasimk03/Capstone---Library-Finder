@@ -1,31 +1,84 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/lsm.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Occupancy Page</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='room.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script>
+        $(".animated-progress span").each(function () {
+    $(this).animate(
+      {
+        width: $(this).attr("data-progress") + "%",
+      },
+      1000
+    );
+    $(this).text($(this).attr("data-progress") + "%");
+  });
+    </script>
+    <title>Occupancy</title>
 </head>
 
 <body>
-    <header>
+
+
+
+
+    <div class='nava'>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Busch</a>
+                <div class="dropdown-content">
+                    <a href="/Busch/Room1">Room 1</a>
+                    <a href="/Busch">Room 2</a>
+                    <a href="/Busch">Room 3</a>
+                </div>
+            </li>
+            <li><a href="/Livingston">Livingston</a></li>
+            <li><a href="/CollegeAve">College Ave</a></li>
+            <li><a href="CookDoug">Cook/Douglass</a></li>
+            <li> <a href='/logout'>Logout</a></li>
+
+        </ul>
+    </div>
+
+    <div class="results">
         <h1>
-            <center>Occupancy Busch Room 1</center>
+            Occupancy Busch Room 1
         </h1>
-    </header>
-    <main>
+        <br></br>
         <h2>
-            <center>Current Occupancy: 75%</center>
+            Current Occupancy: 75%
         </h2>
-        <center><label for="file">Occupancy:</label>
-            <progress id="file" value="75" max="100"> 75% </progress></center>
+        <br></br>
+        <h3>
+            <div class="container">
+
+                <div class="container__progressbars">
+              
+                  <div class="progressbar">
+                    <svg class="progressbar__svg">
+                      <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-html shadow-html"> </circle>
+                    </svg>
+                    <span class="progressbar__text shadow-html">75%</span>
+                  </div>
+                </div>
+            </div>
+              
+        </h3>
         
-        <h3> <a href='/'>Return Home</a></h3>
-        
-    </main>
+
+    </div>
+
+
+    <div class='ani'></div>
+
+
+
+
 </body>
 
 </html>
