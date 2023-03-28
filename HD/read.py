@@ -2,15 +2,17 @@ import time as t
 from getpass import getpass
 from mysql.connector import connect, Error
 from dateutil.parser  import parse
+import upload_to_azure as azure
 
 def read_raw_data(connection):
     start = t.time()
     i,count,prev,azure_output,stack = 0,0,-1,'',[]
+    data_entries=0
+    open('azure_data.txt', 'w').close()                                             #open and delete azure_data.txt file
     with open('data1.txt','r') as f:
         while True:
             data = f.readline()                                             #read data from text file
             write=False
-            #store values in line
             try:
                 data_num, npc_count,date,time = data.split(" | ")           #split data by delimitter
                 time = time[0:8]
@@ -22,20 +24,17 @@ def read_raw_data(connection):
                     index+=1
                     data_num, npc_count,date,time = data.split(" | ")           #split data by delimitter
                 except:
-                    #ERRORR -> need to change cursor location
                     print("No more data available. Check hardware is still functional")
                     return
 
-            print("READING..."+data_num)                                #print(npc_count, date, time)
+            print("READING..."+data_num)                      
             npc_count = npc_count[4:]
             if i==0: 
                 stack.append(int(npc_count))
                 print("Querying database with first value:\n  people={0}\n  date={1}\n  time={2}".format(npc_count,date,time))
                 query_db(connection,npc_count,date,time)                         #query_db
-        #write to text file for cloud upload
-                azure_output = "data-{0}|{1}|{2}|{3}|".format(count,str(npc_count),date,time)+"\n"
+                azure_output = "data-{0}|{1}|{2}|{3}|".format(count,str(npc_count),date,time)+"\n"          #azure output text
                 write=True
-        #call main func of connect [which connects to azure and uploads recent entry ]
                 t.sleep(3); 
             elif len(stack)>0 and stack[-1] != int(npc_count):                   #new incoming data val
                 prev = stack[-1]
@@ -44,18 +43,14 @@ def read_raw_data(connection):
             elif len(stack)>0 and prev > int(npc_count) and count==70:                      #incr num ppl and query db
                 print("Querying database with:\n  people={0}\n  date={1}\n  time={2}".format(npc_count,date,time))
                 query_db(connection,npc_count,date,time)   
-        #write to text file for cloud upload
-                azure_output = "data-{0}|{1}|{2}|{3}|".format(count,str(npc_count),date,time)+"\n"
+                azure_output = "data-{0}|{1}|{2}|{3}|".format(count,str(npc_count),date,time)+"\n"          #azure output text
                 write=True
-        #call main func of connect [which connects to azure and uploads recent entry ]                  
                 t.sleep(3); 
             elif len(stack)>0 and prev < int(npc_count) and count==7:                     #dec num ppl and query db
                 print("Querying database with:\n  people={0}\n  date={1}\n  time={2}".format(npc_count,date,time))
                 query_db(connection,npc_count,date,time)            
-        #write to text file for cloud upload
-                azure_output = "data-{0}|{1}|{2}|{3}|".format(count,str(npc_count),date,time)+"\n"
+                azure_output = "data-{0}|{1}|{2}|{3}|".format(count,str(npc_count),date,time)+"\n"          #azure output text
                 write=True
-        #call main func of connect [which connects to azure and uploads recent entry ]
                 t.sleep(3); 
 
             if len(stack)>0 and stack[-1] == int(npc_count):                   #same value
@@ -64,20 +59,25 @@ def read_raw_data(connection):
             pop = stack[-1]                                                      #top of stack
             i+=1
 
-            #####
-            #check some conditions then write to azure_data.txt and call connect_to_azure
             elapsed_time = t.time() - start
-            if (write==True and elapsed_time >=5) or (count==1):
-                print("Writing data {0} to Azure Blob Storage".format(count))
-                azure_file = open('azure_data.txt','a')
-                start = t.time()
-                azure_file.write(azure_output)
-                azure_file.close()
-            ####
-            t.sleep(0.48)
-    f.close()
-    #open and delete azure_data.txt file
+            if (write==True and elapsed_time >=30) or (count==1):               #pushed to stack and 30s passed or 1st iteration
+                upload_blob_to_azure(azure_output,count,data_entries)           #push data to output text file and/or container
+            t.sleep(0.45)
 
+#write data to azure output file and upload to containers
+def upload_blob_to_azure(azure_output,count,data_entries):
+    print("Writing data {0} to Azure Blob Storage".format(count))
+    azure_file = open('azure_data.txt','a')
+    start = t.time()                                                            #update start time
+    azure_file.write(azure_output)
+    azure_file.close()
+    data_entries+=1                                                             #data values stored in output file
+    if data_entries > 5:                            
+        print(f'Found 5 data entries...Uploading to Azure')
+        t.sleep(1)
+        data_entries=0
+        azure.main()                                                           #connect and upload to azure containers
+        t.sleep(1)
 
 def connect_to_mySQL_server():
     try:
@@ -86,7 +86,8 @@ def connect_to_mySQL_server():
                             #user=input("Enter username: "),
                             #password=getpass("Enter password: "),
                             user='root',
-                            password='ussucks1')
+                            password='password',
+                            auth_plugin='mysql_native_password')
     except Error as e:
         print("Error while connecting to MySQL", e)
         return
@@ -147,8 +148,8 @@ def main():
     except Error as e:
         print("The following error occured: ",e)
     finally:
-        #print("Pulling records")
-        #query_db(connection,push=False)
+        print(f'Saving data to container')
+        azure.main()
         print("closing connection")
         close_mySQL(connection)
 

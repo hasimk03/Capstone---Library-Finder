@@ -3,6 +3,7 @@ import datetime
 import imutils
 import requests
 import numpy as np
+import time as t
 from centroidtracker import CentroidTracker
 
 protopath = "MobileNetSSD_deploy.prototxt"
@@ -84,6 +85,7 @@ def main():
     opc_count = 0
     object_id_list = []
     index=0
+    start = t.time()
     while True:
         ret, frame = cap.read()
         frame = imutils.resize(frame, width=600)
@@ -145,9 +147,10 @@ def main():
         index+=1
         curr_date = datetime.datetime.now()
         date,time  = curr_date.strftime('%x'), curr_date.strftime('%X')
-        f = open("data1.txt", "a")
-        f.write("data-{0} | num={1} | {2} | {3} |".format(index,str(lpc_count),date,time)+"\n")
-        f.close()
+        if t.time() - start >= 15:                                             #5min initialization time b4 storing data
+            f = open("data1.txt", "a")
+            f.write("data-{0} | num={1} | {2} | {3} |".format(index,str(lpc_count),date,time)+"\n")
+            f.close()
 
         ####
         opc_count = len(object_id_list)
@@ -163,8 +166,9 @@ def main():
         if key == ord('q'):
             break
 
-    #open('data1.txt', 'w').close()
+    open('data1.txt', 'w').close()
     cv2.destroyAllWindows()
 
 
-main()
+if __name__ == "__main__":
+    main()
