@@ -91,7 +91,12 @@ def import_busch():
 @views.route('/Busch/Room1')
 @login_required
 def import_busch1():
-    return render_template('room.html')
+    return render_template('room.html', room = "Busch Room 1", percentage = "75%", ticks = 440*(1-.75))
+
+@views.route('/Busch/Room2')
+@login_required
+def import_busch2():
+    return render_template('room.html', room = "Busch Room 2", percentage = "82%", ticks = 440*(1-.82))
 
 @views.route('/CollegeAve')
 @login_required
