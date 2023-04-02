@@ -33,7 +33,24 @@ def login_required(function):
         wrapper.__name__ = function.__name__
         return wrapper
 
+def calculate_ticks(percentage):
+    ticks = 440*(1-percentage)
+    return ticks
 
+def calc_percentage(current, occupancy = 10):
+    percentage = current/occupancy
+    return percentage
+
+def get_current():
+    file = open("Download.txt", 'r')
+    txt = file.readlines()
+    last = txt[-1]
+    seg = last.split("|")
+    return int((seg[1]))
+
+def display_percentage(current, occupancy = 10):
+    percentage = current/occupancy
+    return(f"{percentage:.0%}")
 
 
 @views.route("/")
@@ -91,12 +108,17 @@ def import_busch():
 @views.route('/Busch/Room1')
 @login_required
 def import_busch1():
-    return render_template('room.html', room = "Busch Room 1", percentage = "75%", ticks = 440*(1-.75))
+    return render_template('room.html', room = "Busch Room 1", percentage = "75%", ticks = calculate_ticks(.75))
 
 @views.route('/Busch/Room2')
 @login_required
 def import_busch2():
-    return render_template('room.html', room = "Busch Room 2", percentage = "82%", ticks = 440*(1-.82))
+    return render_template('room.html', room = "Busch Room 2", percentage = "82%", ticks = calculate_ticks(.82))
+
+@views.route('/Busch/Room3')
+@login_required
+def import_busch3():
+    return render_template('room.html', room = "Busch Room 3", percentage = display_percentage(get_current()), ticks = calculate_ticks(calc_percentage(get_current())))
 
 @views.route('/CollegeAve')
 @login_required
