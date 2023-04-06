@@ -48,6 +48,13 @@ def get_current():
     seg = last.split("|")
     return int((seg[1]))
 
+def get_date_time():
+    file = open("Download.txt", 'r')
+    txt = file.readlines()
+    last = txt[-1]
+    seg = last.split("|")
+    return seg[2] + ' ' + seg[3]
+
 def display_percentage(current, occupancy = 10):
     percentage = current/occupancy
     return(f"{percentage:.0%}")
@@ -93,44 +100,163 @@ def logout():
 @views.route('/home')
 @login_required
 def import_home():
-    return render_template("home_logged_in.html")
+    name = session.get('name').title()
+    return render_template("home_logged_in.html",name = name)
 
-@views.route('/Livingston')
+# Busch-->LSM---->1st Floor
+@views.route('/Busch/LSM/1st_Floor')
 @login_required
-def import_livi():
-    return render_template("room.html")
+def import_busch_lsm_1st_floor():
+    return render_template('room.html', room="LSM 1st Floor", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
 
-@views.route('/Busch')
+# Busch-->LSM---->2nd Floor
+@views.route('/Busch/LSM/2nd_Floor')
 @login_required
-def import_busch():
-    return "<h1>Busch</h1>"
+def import_busch_lsm_2nd_floor():
+    return render_template('room.html', room="LSM 2nd Floor", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
 
-@views.route('/Busch/Room1')
+# Busch-->LSM---->3rd Floor
+@views.route('/Busch/LSM/3rd_Floor')
 @login_required
-def import_busch1():
-    return render_template('room.html', room = "Busch Room 1", percentage = "75%", ticks = calculate_ticks(.75))
+def import_busch_lsm_3rd_floor():
+    return render_template('room.html', room="LSM 3rd Floor", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
 
-@views.route('/Busch/Room2')
-@login_required
-def import_busch2():
-    return render_template('room.html', room = "Busch Room 2", percentage = "82%", ticks = calculate_ticks(.82))
 
-@views.route('/Busch/Room3')
+# Busch-->Student_Center---->The_Cove
+@views.route('/Busch/student_center/the_cove')
 @login_required
-def import_busch3():
-     return render_template('room.html', room = "Busch Room 3", percentage = "90%", ticks = calculate_ticks(.90))
+def import_busch_studentCenter_the_cove():
+    return render_template('room.html', room="The Cove", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Busch-->Student_Center---->International_Lounge
+@views.route('/Busch/student_center/international_lounge')
+@login_required
+def import_busch_studentCenter_international_lounge():
+    return render_template('room.html', room="International Lounge", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+
+# Busch-->Student_Center---->Quiet_Study_Room
+@views.route('/Busch/student_center/quiet_study_room')
+@login_required
+def import_busch_studentCenter_quiet_study_room():
+    return render_template('room.html', room="quiet_study_room", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+
+# Livingston-->Kilmer_Library---->Basement
+@views.route('/Livingston/kilmer_library/basement')
+@login_required
+def import_livingston_kilmer_library_basement():
+    return render_template('room.html', room="Basement", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Livingston-->Kilmer_Library---->1st Floor
+@views.route('/Livingston/kilmer_library/1st_floor')
+@login_required
+def import_livingston_kilmer_library_1st_floor():
+    return render_template('room.html', room="1st Floor", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Livingston-->Kilmer_Library---->2nd Floor
+@views.route('/Livingston/kilmer_library/2nd_floor')
+@login_required
+def import_livingston_kilmer_library_2nd_floor():
+    return render_template('room.html', room="2nd Floor", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Livingston-->Student_Center---->The Space
+@views.route('/Livingston/student_center/the_space')
+@login_required
+def import_livingston_student_center_the_space():
+    return render_template('room.html', room="The Space", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Livingston-->Student_Center---->1st Floor Lounge
+@views.route('/Livingston/student_center/1st_floor_lounge')
+@login_required
+def import_livingston_student_center_1st_floor_lounge():
+    return render_template('room.html', room="1st Floor Lounge", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Livingston-->Student_Center---->Coffe_House
+@views.route('/Livingston/student_center/coffe_house')
+@login_required
+def import_livingston_student_center_coffe_house():
+    return render_template('room.html', room="Coffee House", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Douglass-->Student_Center---->Douglass_Lounge
+@views.route('/Douglass/student_center/douglass_lounge')
+@login_required
+def import_douglass_student_center_douglass_lounge():
+    return render_template('room.html', room="Douglass Lounge", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Douglass-->Student_Center---->Quiet Study Room
+@views.route('/Douglass/student_center/quiet_study_room')
+@login_required
+def import_douglass_student_center_quiet_study_room():
+    return render_template('room.html', room="Quiet Study Room", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Douglass-->Student_Center---->NJC Lounge
+@views.route('/Douglass/student_center/njc_lounge')
+@login_required
+def import_douglass_student_center_njc_lounge():
+    return render_template('room.html', room="NJC Lounge", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Cook-->Student_Center---->2nd Floor Lounge
+@views.route('/Cook/student_center/2nd_floor_lounge')
+@login_required
+def import_cook_student_center_2nd_floor_lounge():
+    return render_template('room.html', room="2nd Floor Lounge", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Cook-->Student_Center---->2nd Floor Quiet Lounge
+@views.route('/Cook/student_center/2nd_floor_quiet_lounge')
+@login_required
+def import_cook_student_center_2nd_floor_quiet_lounge():
+    return render_template('room.html', room="2nd Floor Quiet Lounge", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Mabel Smith Library -->Student_Center---->1st Floor Lounge
+@views.route('/mabel_swith_library/student_center/1st_floor_lounge')
+@login_required
+def import_mabel_swith_library_student_center_1st_floor_lounge():
+    return render_template('room.html', room="1st Floor Lounge", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# Mabel Smith Library -->Student_Center---->2nd Floor Lounge
+@views.route('/mabel_swith_library/student_center/2nd_floor_lounge')
+@login_required
+def import_mabelswithLibrary_student_center_2nd_floor_lounge():
+    return render_template('room.html', room="2nd Floor Lounge", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# College Ave-->Alexander Library---->1st Floor Commons Area
+@views.route('/College_Ave/alexander_library/1st_floor_commons_area')
+@login_required
+def import_College_Ave_alexander_library_1st_floor_commons_area():
+    return render_template('room.html', room="1st Floor Commons Area", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# College Ave-->Alexander Library---->2nd Floor
+@views.route('/College_Ave/alexander_library/2nd_floor')
+@login_required
+def import_College_Ave_alexander_library_2nd_floor():
+    return render_template('room.html', room="2nd Floor", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# College Ave-->Alexander Library---->3rd Floor
+@views.route('/College_Ave/alexander_library/3rd_floor')
+@login_required
+def import_College_Ave_alexander_library_3rd_floor():
+    return render_template('room.html', room="3rd Floor", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# College Ave-->Student Center--->Main Lounge
+@views.route('/College_Ave/student_center/main_lounge')
+@login_required
+def import_College_Ave_student_center_main_lounge():
+    return render_template('room.html', room="Main Lounge", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# College Ave-->Student Center--->Red Lion Cafe
+@views.route('/College_Ave/student_center/red_Lion_cafe')
+@login_required
+def import_College_Ave_student_center_red_lion_cafe():
+    return render_template('room.html', room="Red Lion Cafe", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
+
+# College Ave-->Student Center--->4th Floor Lounge
+@views.route('/College_Ave/student_center/4th_floor_lounge')
+@login_required
+def import_College_Ave_student_center_4th_floor_lounge():
+    return render_template('room.html', room="4th Floor Lounge", percentage="75%", ticks=calculate_ticks(.75), date = get_date_time())
 
 @views.route('/testroom')
 @login_required
 def import_test():
-    return render_template('room.html', room = "Test", percentage = display_percentage(get_current()), ticks = calculate_ticks(calc_percentage(get_current())))
-
-@views.route('/CollegeAve')
-@login_required
-def import_collegeave():
-    return "<h1>CollegeAve</h1>"
-
-@views.route('/CookDoug')
-@login_required
-def import_cookdoug():
-    return "<h1>CookDoug</h1>"
+    return render_template('room.html', room = "Test", percentage = display_percentage(get_current()), ticks = calculate_ticks(calc_percentage(get_current())), date = get_date_time())
