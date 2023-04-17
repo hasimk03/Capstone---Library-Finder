@@ -10,9 +10,10 @@ from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 
 class Azure_connection():
     def __init__(self): 
-        self.local_path = r"C:\Users\Hasimk\Documents\GitHub\Capstone---Library-Finder"         #UPDATE TO YOUR WORKING DIRECTORY
+        #self.local_path = r"C:\Users\Hasimk\Documents\GitHub\Capstone---Library-Finder"         #UPDATE TO YOUR WORKING DIRECTORY
+        self.local_path = os.getcwd()
         self.storage_account_name = "libraryfinderstorageacct"  
-        self.connection_string = ""                                 #get from azure portal
+        self.connection_string = "DefaultEndpointsProtocol=https;AccountName=libraryfinderstorageacct;AccountKey=hfhm6XhqHX4jV+OIUVNmD3O0JWsh3XYTCsnVjUlyTSUBx7t8hzIveHBY2mue0vPVt/6caDDjtQO1+AStu8z5+Q==;EndpointSuffix=core.windows.net" #get from azure portal
         self.container_name = "test-room1"                          #dynamic for each location
         self.blob_name = 'azure_data.txt'                           #file name inside container
         self.connect_to_storage_account()
@@ -24,8 +25,8 @@ class Azure_connection():
             blob_service_client = BlobServiceClient(account_url, credential=default_credential)     #create BlobServiceClient object
             print("Gathering Azure credentials")
             self.download_file()
-        except Exception as ex:
-            print('Exception {} occured'.format(ex))
+        except Exception as e:
+            print('Exception',e,' has occured')
 
 
     def download_file(self):
