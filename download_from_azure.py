@@ -10,10 +10,9 @@ from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 
 class Azure_connection():
     def __init__(self): 
-        #self.local_path = r"C:\Users\Hasimk\Documents\GitHub\Capstone---Library-Finder"         #UPDATE TO YOUR WORKING DIRECTORY
-        self.local_path = os.getcwd()
+        self.local_path = os.path.join(os.getcwd(),'data')
         self.storage_account_name = "libraryfinderstorageacct"  
-        self.connection_string = "DefaultEndpointsProtocol=https;AccountName=libraryfinderstorageacct;AccountKey=hfhm6XhqHX4jV+OIUVNmD3O0JWsh3XYTCsnVjUlyTSUBx7t8hzIveHBY2mue0vPVt/6caDDjtQO1+AStu8z5+Q==;EndpointSuffix=core.windows.net" #get from azure portal
+        self.connection_string = ""
         self.container_name = "test-room1"                          #dynamic for each location
         self.blob_name = 'azure_data.txt'                           #file name inside container
         self.connect_to_storage_account()
@@ -30,7 +29,7 @@ class Azure_connection():
 
 
     def download_file(self):
-        download_file_path = os.path.join(self.local_path,r'DOWNLOAD.txt')                          #create full path for downloaded file
+        download_file_path = os.path.join(self.local_path,r'room6.txt')                          #create full path for downloaded file
         
         #Connect to Azure and specific test room container via attributes
         blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)      
