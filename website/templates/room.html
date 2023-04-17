@@ -5,6 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="refresh" content="10" > <!-- auto refreshes page every 10 seconds -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='room.css')}}">
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <title>Occupancy</title>
@@ -220,24 +221,6 @@
 
   <div class='ani'></div>
 
-  <script>
-    function updateOccupancy() {
-      fetch('/occupancy')
-        .then(response => response.json())
-        .then(data => {
-          const percentage = data.percentage;                                                                 
-          document.querySelector('#percentage').textContent = percentage;                                       //update percentage text
-
-          const progressBars = document.querySelectorAll('.progressbar__text.shadow-html');                     //update percentage text in progbar
-          progressBars.forEach(progressBar => {
-            progressBar.textContent = percentage;
-          });
-
-          const ticks = data.ticks;                                                                             //update progressbar ticks
-        });
-    }
-    setInterval(updateOccupancy, 5000);
-    </script>
 
 
 </body>

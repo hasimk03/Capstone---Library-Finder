@@ -6,7 +6,7 @@ from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
 import requests
-import download_from_azure as azure
+# import download_from_azure as azure
 import time as t
 import json
 
@@ -260,27 +260,7 @@ def import_College_Ave_student_center_4th_floor_lounge():
     return render_template('room.html', room="4th Floor Lounge", percentage = display_percentage(get_current('room5.txt')), ticks = calculate_ticks(calc_percentage(get_current('room5.txt'))), date = get_date_time('room5.txt'))
 
 
-@views.before_request
-def call_azure_main():
-    if request.endpoint == 'views.import_test':
-        print(" ",request.headers.get('X-Requested-With'))
-        #azure.main()
-        print('azure.main() called -> sleeping now')
-        #t.sleep(15)
 
-        #'ticks' : calculate_ticks(calc_percentage(get_current()))
-
-
-@views.route('/occupancy')
-@login_required
-#get new file from azure and update webpage elements
-def get_occupancy():
-    #azure.main()                                                               #leave commented
-    percentage = display_percentage(get_current('room6.txt'))
-    ticks = calculate_ticks(calc_percentage(get_current('room6.txt')))
-    #progressbar_text = f"{percentage}% ({ticks}/10)"
-
-    return json.dumps({'percentage': percentage, 'ticks':ticks})
 
 
 
@@ -288,11 +268,8 @@ def get_occupancy():
 @login_required
 def import_test():
     #gather params from downloaded text file
-    percentage = display_percentage(get_current('room6.txt'))
-    ticks = calculate_ticks(calc_percentage(get_current('room6.txt')))
-    progressbar_text = f"{percentage}% ({ticks}/10)"
-    
-    return render_template('room.html', room = "Test", percentage = percentage, ticks = ticks, progressbar_text = progressbar_text, date = get_date_time('room6.txt'))
+    # azure.main()
+    return render_template('room.html', room = "Test", percentage = display_percentage(get_current('room6.txt')), ticks = calculate_ticks(calc_percentage(get_current('room6.txt'))), date = get_date_time('room6.txt'))
     
     #return render_template('room.html', room = "Test", percentage = display_percentage(get_current()), ticks = calculate_ticks(calc_percentage(get_current())), date = get_date_time())
     
