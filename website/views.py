@@ -42,14 +42,14 @@ def calc_percentage(current, occupancy = 10):
     return percentage
 
 def get_current(file_name):
-    file = open(file_name, 'r')
+    file = open("data/" + file_name, 'r')
     txt = file.readlines()
     last = txt[-1]
     seg = last.split("|")
     return int((seg[1]))
 
 def get_date_time(file_name):
-    file = open(file_name, 'r')
+    file = open("data/" + file_name, 'r')
     txt = file.readlines()
     last = txt[-1]
     seg = last.split("|")
