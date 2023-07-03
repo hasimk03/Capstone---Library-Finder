@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home-logged-in.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Logged In</title>
+</head>
+
+<body>
+<h1 style="color:white;">Hello</h1>
+<div class='nava'>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Busch</a>
+              <div class="dropdown-content">
+                <div class="dropdown-submenu">
+                  <a >LSM</a>
+                  <div class="dropdown-submenu-content">
+                    <a href="/Busch/LSM/1st_Floor">1st Floor</a>
+                    <a href="/Busch/LSM/2nd_Floor">2nd Floor</a>
+                    <a href="/Busch/LSM/3rd_Floor">3rd Floor</a>
+                  </div>
+                </div>
+                <div class="dropdown-submenu">
+                  <a > Study Center</a>
+                  <div class="dropdown-submenu-content">
+                    <a href="/Busch/student_center/the_cove">The Cove</a>
+                    <a href="/Busch/student_center/international_lounge">International Lounge</a>
+                    <a href="Busch/student_center/quiet_study_room">Quiet Study Room</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Livingston</a>
+              <div class="dropdown-content">
+                <div class="dropdown-submenu">
+                  <a >Kilmer Library</a>
+                  <div class="dropdown-submenu-content">
+                    <a href="/Livingston/kilmer_library/basement">Basement</a>
+                    <a href="/Livingston/kilmer_library/1st_floor">1st Floor</a>
+                    <a href="/Livingston/kilmer_library/2nd_floor">2nd Floor</a>
+                  </div>
+                </div>
+                <div class="dropdown-submenu">
+                  <a >Livingston Student Center</a>
+                  <div class="dropdown-submenu-content">
+                    <a href="/Livingston/student_center/the_space">The Space</a>
+                    <a href="/Livingston/student_center/1st_floor_lounge">1st Floor Lounge</a>
+                    <a href="/Livingston/student_center/coffe_house">Coffee House</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">College Ave</a>
+              <div class="dropdown-content">
+                <div class="dropdown-submenu">
+                  <a >Alexander Library</a>
+                  <div class="dropdown-submenu-content">
+                    <a href="/College_Ave/alexander_library/1st_floor_commons_area">1st Floor Commons Area</a>
+                    <a href="/College_Ave/alexander_library/2nd_floor">2nd Floor</a>
+                    <a href="/College_Ave/alexander_library/3rd_floor">3rd Floor</a>
+                  </div>
+                </div>
+                <div class="dropdown-submenu">
+                  <a >Student Center</a>
+                  <div class="dropdown-submenu-content">
+                    <a href="/College_Ave/student_center/main_lounge">Main Lounge</a>
+                    <a href="/College_Ave/student_center/red_Lion_cafe">Red Lion Cafe</a>
+                    <a href="/College_Ave/student_center/4th_floor_lounge">4th Floor Lounge</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Cook/Douglass</a>
+              <div class="dropdown-content">
+                <div class="dropdown-submenu">
+                  <a >Douglass Student Center</a>
+                  <div class="dropdown-submenu-content">
+                    <a href="/Douglass/student_center/douglass_lounge">Douglass Lounge</a>
+                    <a href="/Douglass/student_center/quiet_study_room">Quiet Study Room</a>
+                    <a href="/Douglass/student_center/njc_lounge">NJC Lounge</a>
+                  </div>
+                </div>
+                <div class="dropdown-submenu">
+                  <a>Cook Student Center</a>
+                  <div class="dropdown-submenu-content">
+                    <a href="/Cook/student_center/2nd_floor_lounge">2nd Floor Lounge</a>
+                    <a href="/Cook/student_center/2nd_floor_quiet_lounge">2nd Floor Quiet Lounge</a>
+
+                  </div>
+                </div>
+                  <div class="dropdown-submenu">
+                  <a >Mabel Smith Library</a>
+                  <div class="dropdown-submenu-content">
+                    <a href="/mabel_swith_library/student_center/1st_floor_lounge">1st Floor Lounge</a>
+                    <a href="/mabel_swith_library/student_center/2nd_floor_lounge">2nd Floor Lounge</a>
+
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li> <a href='/logout'>Logout</a></li>
+
+        </ul>
+    </div>
+
+    <div class="login">
+        <br></br>
+        <h1>
+            Welcome to Rutgers Library Finder {{name}}
+            <br></br>
+
+        </h1>
+
+        <br></br>
+    </div>
+    <div class = 'ani'></div>
+</body>
+
+</html>
